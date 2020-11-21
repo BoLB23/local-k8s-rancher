@@ -1,0 +1,49 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+      become: yes
+
+    - name: Add Kube repo 
+      yum_repository:
+        name: kubernetes
+        description: kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64 
+        gpgcheck: no
+
+    - name: Install Docker-CE
+      yum:
+        name: docker-ce 
+        state: latest
+
+    - name: Add user vagrant to docker group
+      user:
+        name: vagrant
+        groups: ['docker']
+        append: yes
+      become: yes
+
+    - name: Start and enable docker 
+      systemd:
+        name: docker 
+        state: started
+        enabled: yes
+      register: docker
+
+    - name: Run Rancher UI Container
+      command: docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -p 6443:6443 --privileged rancher/rancher:latest
+      when: docker.changed
+
+    - name: Setup Kubelet Alias 
+      copy:
+        src: kubectl.sh
+        dest: /etc/profile.d/

@@ -6,6 +6,8 @@ This repo creates a local VM running docker and Rancher Management Plane to quic
 
 You will need access to the internet, plus Vagrant installed on your host machine.
 
+Vagrant Download: <https://www.vagrantup.com/downloads>
+
 Additionally you should clone this repo to your host machine.
 
 ```bash
@@ -31,10 +33,17 @@ docker ps
 kubectl get nodes
 kubectl get ns
 ```
+<img src="./img/kubectl.png">
+
 
 Log into the rancher UI (optional).
 
 <https://localhost:443/login>
+
+<img src="./img/1.png">
+
+<img src="./img/2.png">
+
 
 
 ## Contributing

@@ -1,12 +1,13 @@
 # Local K8S Rancher environment
 
-This repo creates a local VM running docker and Rancher Management Plane to quickly test Rancher and/or Kubernetes.
+This repo creates a local CentOS 8 VM running Docker and k8s/Rancher UI to quickly have a local sandbox to use these tools for development.
 
 ## Prerequisites
 
-You will need access to the internet, plus Vagrant installed on your host machine.
+You will need access to the internet, plus Vagrant and VitrualBox (or your choice of hypervisor) installed on your host machine.
 
 Vagrant Download: <https://www.vagrantup.com/downloads>
+VirtualBox Download: <https://www.virtualbox.org/wiki/Downloads>
 
 Additionally you should clone this repo to your host machine.
 
